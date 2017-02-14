@@ -1,0 +1,43 @@
+<idea-plugin version="2">
+  <id>com.vimtools.ideaexactionbar</id>
+  <name>IdeaExActionBar</name>
+  <version>0.0.1</version>
+  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+  <description><![CDATA[
+      Emulate vim command interface bar with IntelliJ action items that can be auto-completed.<br>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Proof of concept version (with bugs)
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="IdeaExActionBar" class="com.vimtools.ideaexactionbar.ExActionHandler" text="Ex Action Handler" description="ex action handler">
+      <keyboard-shortcut first-keystroke="shift F5" keymap="$default"/>
+      <add-to-group group-id="ToolsMenu" anchor="last"/>
+    </action>
+  </actions>
+
+  <application-components>
+    <component>
+      <implementation-class>com.vimtools.ideaexactionbar.ExActionBar</implementation-class>
+    </component>
+  </application-components>
+
+</idea-plugin>
