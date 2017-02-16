@@ -6,5 +6,12 @@ Code definitely needs work. I'm hoping this will trigger interest in making a be
 
 Default short cut key: Shift-F5
 
+List of issues to resolve before publishing:
+* Focus issues
+* Crashes (due to focus issues)
+* Better way to "escape" and auto-close the component on losing focus.
+
+I hope to figure these out sooner or later, but if anyone has better IntelliJ plugin experience, please feel free to chip in. Thanks!
+
 [![Screenshort ](./Screencast.gif)]
 
