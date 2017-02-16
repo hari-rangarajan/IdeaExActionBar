@@ -4,5 +4,7 @@ Prototype plugin put together to demo the possibility of an auto-complete based 
 
 Code definitely needs work. I'm hoping this will trigger interest in making a better Vim command-line interface for IntelliJ.
 
+Default short cut key: Shift-F5
+
 [![Screenshort ](./Screencast.gif)]
 
