@@ -25,6 +25,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Collection;
@@ -32,7 +34,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * This is used to enter ex commands such as searches and "colon" commands
+ * Portions of this code are borrowed from  the ex panel for the idea vim plugin
+ * https://github.com/JetBrains/ideavim
  */
 public class ExPanel extends JPanel {
 
@@ -68,7 +71,7 @@ public class ExPanel extends JPanel {
                     @Override
                     public void run() {
                         executeAction(action, context, entry.getText());
-                        ExPanel.getInstance(project).deactivate(true);
+                        safeDeactivate(project, true);
                     }
 
                 });
@@ -84,7 +87,7 @@ public class ExPanel extends JPanel {
                 application.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        ExPanel.getInstance(project).deactivate(true);
+                        safeDeactivate(project, true);
                         executeAction(action, context, entry.getText());
                     }
 
@@ -166,7 +169,7 @@ public class ExPanel extends JPanel {
         getActionMap().put("closeExPanel", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                ExPanel.getInstance(project).deactivate(true);
+                safeDeactivate(project, true);
             }
         });
 
@@ -200,7 +203,6 @@ public class ExPanel extends JPanel {
         //entry.setDocument(entry.createDefaultModel());
         entry.setText(initText);
         //entry.setType(label);
-        parent = editor.getContentComponent();
         if (!ApplicationManager.getApplication().isUnitTestMode()) {
             JRootPane root = SwingUtilities.getRootPane(parent);
             oldGlass = (JComponent)root.getGlassPane();
@@ -215,6 +217,17 @@ public class ExPanel extends JPanel {
             entry.requestFocusInWindow();
         }
         active = true;
+        editor.getComponent().addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                safeDeactivate(editor.getProject(), true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -343,6 +356,13 @@ public class ExPanel extends JPanel {
             return true;
         }
         return false;
+    }
+
+    private void safeDeactivate(Project project, boolean refocus) {
+        ExPanel instance = ExPanel.getInstance(project);
+        if (instance != null) {
+            instance.deactivate(refocus);
+        }
     }
 
     private boolean active;

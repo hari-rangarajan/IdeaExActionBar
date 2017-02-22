@@ -26,6 +26,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
+ * Portions of this code are borrowed from  the ex panel for the idea vim plugin
+ * https://github.com/JetBrains/ideavim
+ */
+/**
  * @author vlan
  */
 public class UiHelper {

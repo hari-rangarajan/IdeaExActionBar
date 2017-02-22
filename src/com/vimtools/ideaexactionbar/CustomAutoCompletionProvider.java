@@ -58,6 +58,8 @@ import java.util.concurrent.TimeUnit;
  * @author Roman.Chernyatchik
  */
 
+/* Customized to handle hitting ENTER key */
+
 public abstract class CustomAutoCompletionProvider<T> extends TextFieldWithAutoCompletionListProvider<T> implements
     TextCompletionProvider {
   private static final Logger LOG = Logger.getInstance(TextFieldWithAutoCompletionListProvider.class);
